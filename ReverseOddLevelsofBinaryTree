@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+//https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/description/
+class Solution {
+    public TreeNode reverseOddLevels(TreeNode root) {
+        int size = 1;
+        helper(root.left,root.right,size);
+        return root;
+    }
+    public void helper(TreeNode left,TreeNode right, int size){
+        if(left == null || right == null){
+            return;
+        }
+      
+        if(size%2 == 1){
+            int temp = left.val;
+            left.val = right.val;
+            right.val = temp;
+        }
+            //Recursion Calls
+        helper(left.left,right.right,size+1);
+        helper(left.right,right.left,size+1);
+    
+        
+    }
+}
